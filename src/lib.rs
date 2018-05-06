@@ -140,6 +140,7 @@ mod token;
 mod lazycell;
 
 pub mod net;
+pub use net::{IOHook, init_io_hook};
 
 #[deprecated(since = "0.6.5", note = "use mio-extras instead")]
 #[cfg(feature = "with-deprecated")]

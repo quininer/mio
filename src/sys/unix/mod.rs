@@ -12,11 +12,20 @@ macro_rules! syscall {
     }};
 }
 
+#[cfg(not(feature = "io-uring"))]
 #[cfg(any(target_os = "linux", target_os = "android", target_os = "solaris"))]
 mod epoll;
 
+#[cfg(not(feature = "io-uring"))]
 #[cfg(any(target_os = "linux", target_os = "android", target_os = "solaris"))]
 pub use self::epoll::{event, Event, Selector};
+
+#[cfg(feature = "io-uring")]
+mod io_uring;
+
+#[cfg(feature = "io-uring")]
+#[cfg(any(target_os = "linux", target_os = "android", target_os = "solaris"))]
+pub use self::io_uring::{event, Event, Selector};
 
 #[cfg(any(
     target_os = "bitrig",

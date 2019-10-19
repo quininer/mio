@@ -126,5 +126,6 @@ pub fn close_on_drop() {
             }
         }
     }
+
     assert!(handler.state == AfterRead, "actual={:?}", handler.state);
 }

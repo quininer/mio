@@ -1,6 +1,7 @@
 use crate::{event, sys, Events, Interests, Token};
 
 use log::trace;
+#[cfg(not(feature = "io-uring"))]
 #[cfg(unix)]
 use std::os::unix::io::{AsRawFd, RawFd};
 #[cfg(debug_assertions)]
@@ -379,6 +380,7 @@ impl fmt::Debug for Registry {
     }
 }
 
+#[cfg(not(feature = "io-uring"))]
 #[cfg(unix)]
 impl AsRawFd for Poll {
     fn as_raw_fd(&self) -> RawFd {
@@ -667,6 +669,7 @@ impl Clone for SelectorId {
     }
 }
 
+#[cfg(not(feature = "io-uring"))]
 #[test]
 #[cfg(unix)]
 pub fn as_raw_fd() {

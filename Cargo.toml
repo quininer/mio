@@ -24,9 +24,13 @@ exclude       = [
 publish = false
 
 [features]
+io-uring = [ "linux-io-uring" ]
 
 [dependencies]
 log = "0.4.8"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+linux-io-uring = { git = "https://github.com/quininer/linux-io-uring", optional = true }
 
 [target.'cfg(unix)'.dependencies]
 libc = "0.2.62"
